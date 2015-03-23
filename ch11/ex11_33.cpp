@@ -20,7 +20,8 @@ int main()
 {
 	std::ifstream map_file("transformRule.txt");
 	std::ifstream input("inputText.txt");
-	word_transform(map_file, input);
+	if (map_file && input)
+		word_transform(map_file, input);
 	return 0;
 }
 
