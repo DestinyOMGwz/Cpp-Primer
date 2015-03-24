@@ -5,6 +5,8 @@ StrBlob::StrBlob() : data(std::make_shared<std::vector<std::string>>()) {}
 
 StrBlob::StrBlob(const std::initializer_list<std::string> &il) : data(std::make_shared<std::vector<std::string>>(il)) {}
 
+StrBlob::~StrBlob() {}
+
 void StrBlob::check(StrBlob::size_type i, const std::string &msg) const
 {
 	if (i >= data->size()) throw std::out_of_range(msg);
