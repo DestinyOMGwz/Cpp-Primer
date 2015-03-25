@@ -1,4 +1,5 @@
 #include "StrBlob.h"
+#include "StrBlobPtr.h"
 
 // Constructor
 StrBlob::StrBlob() : data(std::make_shared<std::vector<std::string>>()) {}
@@ -46,6 +47,18 @@ const std::string& StrBlob::back() const
 	check(0, "back on empty StrBlob");
 	return data->back();
 }
+
+StrBlobPtr StrBlob::begin() const
+{
+	return StrBlobPtr(*this);
+}
+
+StrBlobPtr StrBlob::end() const
+{
+	return StrBlobPtr(*this, data->size());
+}
+
+// Functionality
 
 void StrBlob::push_back(const std::string &t)
 {

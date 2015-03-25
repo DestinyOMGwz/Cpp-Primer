@@ -13,10 +13,13 @@
 #include <string>
 #include <vector>
 
+// class StrBlobPtr;
+
 class StrBlob
 {
 public:
 	typedef std::vector<std::string>::size_type size_type;
+	friend class StrBlobPtr;
 	// Constructors
 	StrBlob();
 	StrBlob(const std::initializer_list<std::string> &il);
@@ -29,10 +32,15 @@ public:
 	std::string& back();
 	const std::string& front() const;
 	const std::string& back() const;
+	StrBlobPtr begin() const;
+	StrBlobPtr end() const;
+	
 
 	// Functionality
 	void push_back(const std::string &t);
 	void pop_back();
+
+	
 
 private:
 	std::shared_ptr<std::vector<std::string>> data;

@@ -28,6 +28,9 @@ public:
 	// Functionality
 	StrBlobPtr& incr();
 
+	// Member overloading
+	bool operator!=(const StrBlobPtr&) const;
+
 private:
 	std::weak_ptr<std::vector<std::string>> wptr;
 	std::size_t curr;

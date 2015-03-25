@@ -32,3 +32,9 @@ StrBlobPtr& StrBlobPtr::incr()
 	++curr;
 	return *this;
 }
+
+// Member overloading
+bool StrBlobPtr::operator!=(const StrBlobPtr& source) const
+{
+	return wptr.lock() != source.wptr.lock() || curr != source.curr;
+}
