@@ -8,26 +8,43 @@ class HasPtr
 {
 public:
 	HasPtr(const std::string &s = std::string()) : ps(new std::string(s)), i(0) {};
-
-	// Copy behave like pointer, in this case is a bad design
-	/*HasPtr(const HasPtr& source) : ps(source.ps), i(source.i) {}
-	HasPtr& operator=(const HasPtr& source)
-	{
-		if (ps == source.ps)
-			return *this;
-		if (!ps) delete ps;
-		i = source.i;
-		ps = source.ps;
-		return *this;
-	}*/
-
-	// copy behave like value
+	
+	
 	HasPtr(const HasPtr& source) : ps(new std::string(*source.ps)), i(source.i) {}
+	HasPtr(HasPtr &&source) :ps(source.ps), i(source.i)
+	{
+		source.ps = 0;
+	}
 	HasPtr& operator=(HasPtr source)
 	{
 		swap(*this, source);		
 		return *this;
 	}
+	/*HasPtr& operator=(const HasPtr &rhs)
+	{
+		auto p = new std::string(*rhs.ps);
+		delete ps;
+		ps = p;
+		i = rhs.i;
+		return *this;
+	}
+
+	HasPtr& operator=(HasPtr &&rhs)
+	{
+		if (this != &rhs){
+			delete ps;
+			ps = rhs.ps;
+			i = rhs.i;
+			rhs.ps = 0;
+		}
+		return *this;
+	}*/
+
+	bool operator<(const HasPtr &rhs)
+	{
+		return *ps < *rhs.ps;
+	}
+
 	~HasPtr() { delete ps; };
 
 	friend void swap(HasPtr &lfs, HasPtr &rhs);
